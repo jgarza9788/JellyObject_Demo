@@ -18,6 +18,8 @@ Description/Features
 -------------------------------------
 Make 2D Jelly Objects!* Shrink & Grow!
 * Connect Child Objects
+* Pull-Drag-Shoot
+* Sticky!
 * Plus Awesome Shader!
 Terms of Use
 -------------------------------------
@@ -30,10 +32,15 @@ Table of Contents
 -------------------------------------
 1. Full Discolsure
 2. JellyObject.cs 
-3. Other Scripts
+3. JellyObjectCollision.cs
+4. JellyObjectSticky.cs
+5. JellyObjectPuller.cs
+6. Other Scripts
 	* Controls.cs
-	* Demo.cs
-4. distortion.shader
+	* SwitchScenes.cs
+	* Demo0.cs
+	* Demo1.cs
+7. distortion.shader
 
   
 Full Discolsure
@@ -104,13 +111,86 @@ used to increase or decrease the size of this Object.
 call rebuild if you want to recreate all the reference points, Springs, etc.
 (if you change a variable you might want to call this so the change will take effect).
 
+JellyObjectCollision.cs
+-------------------------------------
+This is an Extension script for the JellyObject.cs.  
+This script can be modified to controll what should happen during collision events. (i.e. take damage, increase in size, descrease in size, etc etc etc)
+
+*Note: in it's current form this script only detects if the JellyObject is on the ground, or not.*
+
+**printCollisions**  
+print collisions in console
+
+**isOnGround**  
+this Bool determines if the JellyObject is on the ground
+
+**GroundTags**  
+Tags that will determine if an object is "ground".
+
+![Imgur](http://i.imgur.com/O4uDOkA.png)
+
+JellyObjectSticky.cs
+-------------------------------------
+This is an Extension script for the JellyObject.cs.
+This script controlls weather the JellyObject is sticky or not
+
+**stickToTags**  
+Tags that will determine of the object sticks
+
+**stuckToObj**  
+the object this JellyObject is stuck to (used for Referencing in other scripts)
+
+**unStick()**  
+used to unstick this jellyObject (Method)
+
+![Imgur](http://i.imgur.com/w5wk8WE.png)
+
+JellyObjectPuller.cs
+-------------------------------------
+This is an Extension script for the JellyObject.cs.
+This Script is a StateMachine that adds pull-drag-shoot functionality of the JellyObject.
+
+**PrevState**  
+The Previous State.
+
+**State**  
+The Current State 
+
+**PullerLinePrefab**  
+The puller line prefab. (this is just an Object with a LineRederer on it)
+please see prefab in prefab folder for more info.
+
+**ForceMultiplier**  
+The force multiplier.
+
+**maxPullDistance**  
+The max pull distance.
+
+**pullingTimeScale**  
+The time scale while the object is in the PULLING State
+
+**mustTouchOn**  
+Weather or not the touch must occur on the object itself.
+
+**AllowOnlyOnGroundOrStuck**  
+The allow pull-drag-shoot functionality only on ground or stuck.
+
+![Imgur](http://i.imgur.com/xPgSCk1.png)
+
 Other Scripts
 -------------------------------------
 **Controls.cs:**  
 Basic arrow controls to move the JellyObject
 
-**Demo.cs:**  
-Basic script to control the Size, Color, and more in the demo. 
+**SwitchScenes.cs:**  
+Used to change the scene. 
+
+**Demo0.cs:**  
+Basic script to control the Size, Color, and more in the Demo0. 
+
+**Demo1.cs:**  
+Basic script to control the Force, StickToggle, and more in Demo1.
+
  
 distortion.shader 
 -------------------------------------
